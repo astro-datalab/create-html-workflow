@@ -33,7 +33,7 @@ jobs:
             fi
           done
           echo "Changed files: ${notebooks[@]}"
-          if [ ${#notebooks[@]} -eq 0 ]; then
+          if (( ${#notebooks[@]} == 0 )); then
             jupyter nbconvert --to html ${notebooks[@]}
           fi
       - name: Push and commit new HTML files
