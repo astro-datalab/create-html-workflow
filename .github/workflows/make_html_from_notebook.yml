@@ -33,9 +33,7 @@ jobs:
             fi
           done
           echo "Changed files: ${notebooks[@]}"
-          if (( ${#notebooks[@]} == 0 )); then
-            jupyter nbconvert --to html ${notebooks[@]}
-          fi
+          jupyter nbconvert --to html ${notebooks[@]}
       - name: Push and commit new HTML files
         #Commits changes to the branch being merged into main
         run: |
