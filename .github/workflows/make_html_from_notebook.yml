@@ -4,14 +4,13 @@ on:
   #push:
    # paths: "**.ipynb"
   # Trigger on PRs that change the notebooks in some way
-  #pull_request:
-    #branches: [main]
-    #paths: "**.ipynb"
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    branches: [main]
+    paths: "**.ipynb"
+  #pull_request_review:
+    #types: [submitted]
 jobs:
   approved:
-    if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
     steps:
       - run: echo "This PR was approved"
