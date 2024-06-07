@@ -19,6 +19,12 @@ jobs:
         with:
           #Only checkout the branch that is being merged into main
           ref: ${{ github.head_ref }}
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3'
+      - name: Installing Packages
+        run: pip install jupyter nbconvert
       - name: Getting only the changed Notebooks
         # Gets only the changed files using an action from the marketplace
         uses: Ana06/get-changed-files@v2.3.0
