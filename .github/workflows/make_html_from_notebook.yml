@@ -40,7 +40,7 @@ jobs:
               notebooks+=("$changed_file")
             elif [[ "$changed_file" == *".html" ]]; then
               striped="${changed_file%.*}.ipynb"
-              notebook+=("$striped")
+              notebooks+=("$striped")
             fi
           done
           echo "Changed files: ${notebooks[@]}"
