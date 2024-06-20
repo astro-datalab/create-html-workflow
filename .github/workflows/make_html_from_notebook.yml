@@ -38,7 +38,7 @@ jobs:
           for changed_file in ${{ steps.changes.outputs.all }}; do
             if [[ "$changed_file" == *".ipynb" ]]; then
               notebooks+=("$changed_file")
-            elif [[ "$changed_file == *".html" ]]; then
+            elif [[ "$changed_file" == *".html" ]]; then
               striped="${changed_file%.*}.ipynb"
               notebook+=("$striped")
             fi
