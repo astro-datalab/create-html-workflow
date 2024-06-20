@@ -6,7 +6,9 @@ on:
   # Trigger on PRs that change the notebooks in some way
   pull_request:
     branches: [main]
-    paths: "**.ipynb"
+    paths: 
+      - "**.ipynb"
+      - "**.html"
   #pull_request_review:
     #types: [submitted]
 jobs:
@@ -36,6 +38,15 @@ jobs:
           for changed_file in ${{ steps.changes.outputs.added_modified }}; do
             if [[ "$changed_file" == *".ipynb" ]]; then
               notebooks+=("$changed_file")
+            elif [[ "$changed_file" == *".html" ]]; then
+              striped="${changed_file%.*}.ipynb"
+              notebooks+=("$striped")
+            fi
+          done
+          for changed_file in ${{ steps.changes.outputs.removed }}; do
+            if [[ "$changed_file" == *".html" ]]; then
+              striped="${changed_file%.*}.ipynb"
+              notebooks+=("$striped")
             fi
           done
           echo "Changed files: ${notebooks[@]}"
