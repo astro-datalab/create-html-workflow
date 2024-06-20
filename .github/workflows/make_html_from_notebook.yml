@@ -35,10 +35,16 @@ jobs:
         #Makes the list of changed files into only the list of changed notebooks, then runs and converts all notebooks
         run: |
           notebooks=()
-          for changed_file in ${{ steps.changes.outputs.all }}; do
+          for changed_file in ${{ steps.changes.outputs.added_modified }}; do
             if [[ "$changed_file" == *".ipynb" ]]; then
               notebooks+=("$changed_file")
             elif [[ "$changed_file" == *".html" ]]; then
+              striped="${changed_file%.*}.ipynb"
+              notebooks+=("$striped")
+            fi
+          done
+          for changed_file in ${{ steps.changes.outputs.removed }}; do
+            if [[ "$changed_file" == *".html" ]]; then
               striped="${changed_file%.*}.ipynb"
               notebooks+=("$striped")
             fi
